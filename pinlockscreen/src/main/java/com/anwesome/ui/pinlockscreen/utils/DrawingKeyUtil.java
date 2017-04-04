@@ -21,13 +21,13 @@ public class DrawingKeyUtil {
         paint.setColor(Color.WHITE);
         paint.setTextSize(size/3);
         paint.setStyle(Paint.Style.FILL);
-        canvas.drawText(text,size/2,size/2,paint);
+        canvas.drawText(text,size/2-paint.measureText(text)/2,size/2-paint.getTextSize()/2,paint);
     }
     private static void drawBackSpace(Canvas canvas, Paint paint,float size,String text) {
         paint.setColor(Color.WHITE);
         paint.setStyle(Paint.Style.FILL);
         canvas.save();
-        canvas.translate(size/2,size/2-size/12);
+        canvas.translate(size/2,size/2-size/3);
         Path path = new Path();
         path.moveTo(-size/6,0);
         path.lineTo(0,-size/6);
