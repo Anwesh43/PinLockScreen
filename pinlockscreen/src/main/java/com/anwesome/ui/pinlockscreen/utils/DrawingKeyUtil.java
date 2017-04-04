@@ -27,22 +27,23 @@ public class DrawingKeyUtil {
         paint.setColor(Color.WHITE);
         paint.setStyle(Paint.Style.FILL);
         canvas.save();
-        canvas.translate(size/2,size/2);
+        canvas.translate(size/2,size/2-size/12);
         Path path = new Path();
-        path.moveTo(-size/2,0);
-        path.lineTo(0,-size/2);
-        path.lineTo(0,size/2);
-        path.lineTo(size/2,size/2);
-        path.lineTo(0,size/2);
-        path.lineTo(-size/2,0);
+        path.moveTo(-size/6,0);
+        path.lineTo(0,-size/6);
+        path.lineTo(size/5,-size/6);
+        path.lineTo(size/5,size/6);
+        path.lineTo(0,size/6);
+        path.lineTo(-size/6,0);
         canvas.drawPath(path,paint);
         paint.setColor(Color.BLACK);
         paint.setStyle(Paint.Style.STROKE);
-        paint.setStrokeWidth(size/20);
+        paint.setStrokeWidth(size/40);
         for(int i=0;i<2;i++) {
             canvas.save();
+            canvas.translate(size/12,0);
             canvas.rotate(90*i+45);
-            canvas.drawLine(0,-size/2,0,size/2,paint);
+            canvas.drawLine(0,-size/12,0,size/12,paint);
             canvas.restore();
         }
         canvas.restore();

@@ -24,9 +24,12 @@ public class PinKeyPad {
         return value;
     }
     public void draw(Canvas canvas,Paint paint) {
+        canvas.save();
+        canvas.translate(x,y);
         for(PinKey pinKey:pinKeys) {
             pinKey.draw(canvas,paint);
         }
+        canvas.restore();
     }
     public boolean handleTap(float x,float y) {
         x-=this.x;

@@ -19,9 +19,9 @@ public class PinLockScreenView extends View {
         if(time == 0) {
             w = canvas.getWidth();
             h = canvas.getHeight();
-            pinKeyPad = new PinKeyPad(w/4,h/2,3*w/4);
+            pinKeyPad = new PinKeyPad(w/4-w/9,h/4,3*w/4);
         }
-        canvas.drawColor(Color.parseColor("#AAFFFFFF"));
+        canvas.drawColor(Color.parseColor("#AA000000"));
         pinKeyPad.draw(canvas,paint);
         time++;
     }
