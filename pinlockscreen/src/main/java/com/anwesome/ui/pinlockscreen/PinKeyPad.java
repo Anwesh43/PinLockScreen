@@ -1,9 +1,6 @@
 package com.anwesome.ui.pinlockscreen;
 
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Path;
+import android.graphics.*;
 
 import com.anwesome.ui.pinlockscreen.utils.DrawingKeyUtil;
 
