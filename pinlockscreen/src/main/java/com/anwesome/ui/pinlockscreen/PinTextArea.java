@@ -54,7 +54,9 @@ public class PinTextArea {
         }
         else {
             pinDots.remove(currPinDot);
-            currPinDot = pinDots.peek();
+            for(PinDot pinDot:pinDots) {
+                currPinDot = pinDot;
+            }
         }
         for(PinDot pinDot:pinDots) {
             pinDot.changeX(dir);

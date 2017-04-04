@@ -121,7 +121,7 @@ public class PinKeyPad {
             boolean conditon =  x>=this.x && x<=this.x+size && y>=this.y && y<=this.y+size;
             if(conditon) {
                 if(val.equals("back") && value.length()>0) {
-                    value.substring(0,value.length()-1);
+                    value = value.substring(0,value.length()-1);
                 }
                 else {
                     value = value+val;
