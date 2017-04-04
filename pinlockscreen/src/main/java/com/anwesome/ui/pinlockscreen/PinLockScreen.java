@@ -1,6 +1,8 @@
 package com.anwesome.ui.pinlockscreen;
 
 import android.app.Activity;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -28,10 +30,34 @@ public class PinLockScreen {
         if(pinLockScreenView.getVisibility() == View.INVISIBLE) {
             pinLockScreenView.setVisibility(View.VISIBLE);
         }
+        if(activity instanceof AppCompatActivity) {
+            ActionBar actionBar = ((AppCompatActivity)activity).getSupportActionBar();
+            if(actionBar!=null) {
+                actionBar.hide();
+            }
+        }
+        else {
+            android.app.ActionBar actionBar = activity.getActionBar();
+            if(actionBar!=null) {
+                actionBar.hide();
+            }
+        }
     }
     public void hide() {
         if(pinLockScreenView!=null && pinLockScreenView.getVisibility() == View.VISIBLE) {
             pinLockScreenView.setVisibility(View.INVISIBLE);
+            if(activity instanceof AppCompatActivity) {
+                ActionBar actionBar = ((AppCompatActivity)activity).getSupportActionBar();
+                if(actionBar!=null) {
+                    actionBar.show();
+                }
+            }
+            else {
+                android.app.ActionBar actionBar = activity.getActionBar();
+                if(actionBar!=null) {
+                    actionBar.show();
+                }
+            }
         }
     }
     interface OnPinMatchListener {
