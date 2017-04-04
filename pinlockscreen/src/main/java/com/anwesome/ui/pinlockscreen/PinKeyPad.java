@@ -23,6 +23,9 @@ public class PinKeyPad {
         this.animationController = animationController;
         init();
     }
+    public void reset() {
+        value = "";
+    }
     public String getValue() {
         return value;
     }
@@ -102,7 +105,7 @@ public class PinKeyPad {
             canvas.restore();
         }
         public void updateOnTap() {
-            circScale+=0.2f*dir;
+            circScale+=0.3f*dir;
             if(circScale>=1) {
                 dir = -1;
             }

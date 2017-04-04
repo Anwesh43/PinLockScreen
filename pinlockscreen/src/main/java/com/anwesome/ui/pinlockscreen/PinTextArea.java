@@ -61,6 +61,10 @@ public class PinTextArea {
         }
         this.n = n;
     }
+    public void reset() {
+        n = 0;
+        pinDots = new ConcurrentLinkedQueue<>();
+    }
     private class PinDot {
         private float scale = 0.8f,x,y,r,dir = 1;
         public PinDot(float x) {

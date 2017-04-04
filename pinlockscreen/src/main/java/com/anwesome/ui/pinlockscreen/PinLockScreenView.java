@@ -16,8 +16,12 @@ public class PinLockScreenView extends View {
     private AnimationController animationController = new AnimationController();
     private int w,h;
     private int time = 0;
-    public PinLockScreenView(Context context) {
+    private String reqPin="",pinNum="";
+    private PinLockScreen.OnPinMatchListener onPinMatchListener;
+    public PinLockScreenView(Context context, String reqPin, PinLockScreen.OnPinMatchListener onPinMatchListener) {
         super(context);
+        this.reqPin = reqPin;
+        this.onPinMatchListener = onPinMatchListener;
     }
     public void onDraw(Canvas canvas) {
         if(time == 0) {
@@ -25,7 +29,24 @@ public class PinLockScreenView extends View {
             h = canvas.getHeight();
             pinTextArea = new PinTextArea(w/2-Math.min(w,h)/8,h/6,Math.min(w,h)/4,animationController);
             pinKeyPad = new PinKeyPad(w/4-w/9,h/4,3*w/4,animationController);
+            animationController.setOnAnimationStopListener(new AnimationController.OnAnimationStopListener() {
+                @Override
+                public void onAnimationStop() {
+                    if(pinNum.length() == 4) {
+                        if (pinNum.equals(reqPin)) {
+                            if (onPinMatchListener != null) {
+                                onPinMatchListener.onPinMatch();
+                            }
+                        } else {
+                            pinTextArea.reset();
+                            pinKeyPad.reset();
+                            postInvalidate();
+                        }
+                    }
+                }
+            });
         }
+
         canvas.drawColor(Color.parseColor("#AA000000"));
         pinKeyPad.draw(canvas,paint);
         pinTextArea.draw(canvas,paint);
@@ -46,11 +67,10 @@ public class PinLockScreenView extends View {
         float x = event.getX(),y = event.getY();
         if(event.getAction() == MotionEvent.ACTION_DOWN && !animationController.animating()) {
             if(pinKeyPad.handleTap(x,y)) {
-                if(pinKeyPad.getValue().length() <= 4) {
-                    pinTextArea.setN(pinKeyPad.getValue().length());
-                    animationController.start();
-                    postInvalidate();
-                }
+                pinNum = pinKeyPad.getValue();
+                pinTextArea.setN(pinKeyPad.getValue().length());
+                animationController.start();
+                postInvalidate();
             }
         }
         return true;

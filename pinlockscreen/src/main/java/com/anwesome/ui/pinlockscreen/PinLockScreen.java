@@ -10,12 +10,19 @@ import android.view.ViewGroup;
 public class PinLockScreen {
     private Activity activity;
     private PinLockScreenView pinLockScreenView;
-    public PinLockScreen(Activity activity) {
+    private String pin;
+    public PinLockScreen(Activity activity,String pin) {
         this.activity = activity;
+        this.pin = pin;
     }
     public void show() {
         if(pinLockScreenView == null) {
-            pinLockScreenView = new PinLockScreenView(activity);
+            pinLockScreenView = new PinLockScreenView(activity, pin, new OnPinMatchListener() {
+                @Override
+                public void onPinMatch() {
+                    hide();
+                }
+            });
             activity.addContentView(pinLockScreenView,new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         }
         if(pinLockScreenView.getVisibility() == View.INVISIBLE) {
@@ -26,5 +33,8 @@ public class PinLockScreen {
         if(pinLockScreenView!=null && pinLockScreenView.getVisibility() == View.VISIBLE) {
             pinLockScreenView.setVisibility(View.INVISIBLE);
         }
+    }
+    interface OnPinMatchListener {
+        void onPinMatch();
     }
 }
