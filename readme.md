@@ -3,7 +3,7 @@
 ## An android library to add a screen lock asking for a pin in your app
 
 
-## Usage In your activity
+## Usage In your activity(second param is the pin number with which you need to match)
 
 ```
     PinLockScreen pinLockScreen = new PinLockScreen(this,"1034");
